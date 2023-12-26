@@ -5,7 +5,7 @@ pipeline {
       stage('Build') {
         steps {
           script {
-            dockerImage = docker.build("hanzla9909/distance-converter:${env.BUILD_ID}")
+            dockerImage = docker.build("hanzla132/distance-converter:${env.BUILD_ID}")
         }
     }
 }
@@ -57,10 +57,10 @@ pipeline {
                                     configName: "hanzlavm",
                                     transfers: [sshTransfer(
                                         execCommand: """
-                                            docker pull hanzla9909/distance-converter:${previousSuccessfulTag}
+                                            docker pull hanzla132/distance-converter:${previousSuccessfulTag}
                                             docker stop distance-converter-container || true
                                             docker rm distance-converter-container || true
-                                            docker run -d --name distance-converter-container -p 80:80 hanzla9909/distance-converter:${previousSuccessfulTag}
+                                            docker run -d --name distance-converter-container -p 80:80 hanzla132/distance-converter:${previousSuccessfulTag}
                                         """
                                     )]
                                 )
